@@ -7,7 +7,67 @@ import { useState, useRef, useEffect } from "react";
 export default function Home() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [selectedPathway, setSelectedPathway] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pricingRef = useRef<HTMLDivElement>(null);
+
+  const pathways = [
+    {
+      id: "parent",
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+        </svg>
+      ),
+      label: "I\u0027m a parent seeking support for my family",
+      sublabel: "Parent sessions, family coaching & programs",
+      color: "amber",
+    },
+    {
+      id: "adhd",
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+        </svg>
+      ),
+      label: "I have ADHD and want coaching + therapy",
+      sublabel: "EMDR, clinical packages & monthly coaching",
+      color: "green",
+    },
+    {
+      id: "trauma",
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+        </svg>
+      ),
+      label: "I need therapy for trauma, anxiety, or life changes",
+      sublabel: "EMDR sessions & clinical packages",
+      color: "rose",
+    },
+    {
+      id: "ndis",
+      icon: (
+        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+        </svg>
+      ),
+      label: "I\u0027m an NDIS participant",
+      sublabel: "No out-of-pocket cost · Capacity Building",
+      color: "blue",
+    },
+  ];
+
+  function selectPathway(id: string) {
+    setSelectedPathway(id);
+    setTimeout(() => {
+      pricingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  }
+
+  // Visibility helper: show a card if no pathway selected or if the card belongs to the active pathway
+  const show = (cardPathways: string[]) =>
+    !selectedPathway || cardPathways.includes(selectedPathway);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -27,6 +87,7 @@ export default function Home() {
           <Link href="/" className="text-xl font-serif text-stone-800">
             Integral Heart <span className="text-stone-500 text-sm ml-2">整合心理</span>
           </Link>
+
           {/* Desktop Nav */}
           <div className="hidden md:flex gap-8 items-center">
             {/* Services Dropdown */}
@@ -52,7 +113,8 @@ export default function Home() {
                       </div>
                       <div>
                         <div className="text-sm font-medium text-stone-800 group-hover:text-amber-700 transition-colors">EMDR &amp; Trauma Therapy</div>
-                        <div className="text-xs text-stone-500">Evidence-based trauma reprocessing</div>                      </div>
+                        <div className="text-xs text-stone-500">Evidence-based trauma reprocessing</div>
+                      </div>
                     </Link>
                     <Link href="#pricing" onClick={() => setServicesOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-stone-50 transition-colors group">
                       <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
@@ -80,7 +142,8 @@ export default function Home() {
                       </div>
                       <div>
                         <div className="text-sm font-medium text-stone-800 group-hover:text-green-700 transition-colors">Monthly Coaching</div>
-                        <div className="text-xs text-stone-500">Foundations, Growth &amp; Intensive</div>                      </div>
+                        <div className="text-xs text-stone-500">Foundations, Growth &amp; Intensive</div>
+                      </div>
                     </Link>
                   </div>
                   <div className="bg-stone-50 px-5 py-3 border-t border-stone-100">
@@ -112,7 +175,8 @@ export default function Home() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               ) : (
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              )}            </svg>
+              )}
+            </svg>
           </button>
         </div>
 
@@ -141,6 +205,7 @@ export default function Home() {
           </div>
         )}
       </nav>
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
@@ -170,7 +235,8 @@ export default function Home() {
                 Registered Social Worker (AASW)
               </span>
               <span className="text-xs text-stone-500 flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-600 rounded-full" aria-hidden="true"></span>                EMDR Trained (Levels 1–2)
+                <span className="w-2 h-2 bg-green-600 rounded-full" aria-hidden="true"></span>
+                EMDR Trained (Levels 1–2)
               </span>
               <span className="text-xs text-stone-500 flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-600 rounded-full" aria-hidden="true"></span>
@@ -203,6 +269,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* Services Preview */}
       <section id="services" className="py-20 px-6 bg-white">
         <div className="max-w-6xl mx-auto text-center">
@@ -231,7 +298,8 @@ export default function Home() {
                 subtitle: "EMDR 创伤治疗",
                 description: "Evidence-based trauma reprocessing for PTSD, complex trauma, anxiety, and accumulated shame.",
                 href: "/emdr-therapy"
-              },              {
+              },
+              {
                 icon: (
                   <svg className="w-7 h-7 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364V3m0 2.364a48.345 48.345 0 00-.334 0" />
@@ -265,6 +333,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* Bilingual section */}
       <section id="languages" className="py-20 px-6 bg-stone-50">
         <div className="max-w-4xl mx-auto">
@@ -272,23 +341,94 @@ export default function Home() {
             <div>
               <h2 className="text-3xl font-serif text-stone-900 mb-6">中英双语心理咨询</h2>
               <div className="space-y-4 text-stone-600 leading-relaxed">
-                <p>如果你更习惯用中文表达内心感受，或者需要一个真正理解华人文化背景的治疗师，我可以帮助你。</p>
-                <p>许多华人在成长过程中从未接触过心理健康的概念。心理问题常常被归结为&quot;想太多&quot;或&quot;不够坚强&quot;。来到澳大利亚后，在一个完全不同的文化中寻求心理支持，又面临着语言和理解上的隔阂。</p>
-                <p>我提供完全中文的心理治疗，同时深刻理解在两种文化之间生活的复杂感受。你不需要翻译自己的经历——我已经在那里了。</p>
+                <p>
+                  如果你更习惯用中文表达内心感受，或者需要一个真正理解华人文化背景的治疗师，我可以帮助你。
+                </p>
+                <p>
+                  许多华人在成长过程中从未接触过心理健康的概念。心理问题常常被归结为&quot;想太多&quot;或&quot;不够坚强&quot;。来到澳大利亚后，在一个完全不同的文化中寻求心理支持，又面临着语言和理解上的隔阂。
+                </p>
+                <p>
+                  我提供完全中文的心理治疗，同时深刻理解在两种文化之间生活的复杂感受。你不需要翻译自己的经历——我已经在那里了。
+                </p>
               </div>
             </div>
             <div>
               <h2 className="text-3xl font-serif text-stone-900 mb-6">Bilingual therapy</h2>
               <div className="space-y-4 text-stone-600 leading-relaxed">
-                <p>For Chinese-Australians, accessing mental health support often means navigating a system that doesn&apos;t fully understand your cultural context. Concepts like filial piety, family face, and intergenerational expectations shape your experience in ways a therapist needs to get.</p>
-                <p>I offer sessions in Mandarin, English, or a mix of both — whatever feels most natural to you. Some things land better in Mandarin. Some in English. The ability to switch between languages in therapy isn&apos;t a convenience; it&apos;s a therapeutic tool.</p>
+                <p>
+                  For Chinese-Australians, accessing mental health support often means navigating a system that doesn&apos;t fully understand your cultural context. Concepts like filial piety, family face, and intergenerational expectations shape your experience in ways a therapist needs to get.
+                </p>
+                <p>
+                  I offer sessions in Mandarin, English, or a mix of both — whatever feels most natural to you. Some things land better in Mandarin. Some in English. The ability to switch between languages in therapy isn&apos;t a convenience; it&apos;s a therapeutic tool.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
-      {/* PRICING — CLINICAL THERAPY (ONE-TIME) */}
-      <section id="pricing" className="py-20 px-6 bg-white">
+
+      {/* ═══════════════════════════════════════════ */}
+      {/* "WHAT BRINGS YOU HERE?" GATEWAY              */}
+      {/* ═══════════════════════════════════════════ */}
+      <section id="gateway" className="py-20 px-6 bg-white border-b border-stone-100">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-serif text-stone-900 mb-3">What brings you here?</h2>
+          <p className="text-stone-500 font-serif mb-2">你来这里的原因是什么？</p>
+          <p className="text-stone-500 text-sm mb-12 max-w-lg mx-auto">
+            Choose what feels closest — I&apos;ll show you the services and pricing most relevant to you.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {pathways.map((p) => {
+              const isActive = selectedPathway === p.id;
+              const colorMap: Record<string, { border: string; bg: string; icon: string; ring: string }> = {
+                amber: { border: "border-amber-300", bg: "bg-amber-50", icon: "text-amber-700", ring: "ring-amber-200" },
+                green: { border: "border-green-300", bg: "bg-green-50", icon: "text-green-700", ring: "ring-green-200" },
+                rose: { border: "border-rose-300", bg: "bg-rose-50", icon: "text-rose-700", ring: "ring-rose-200" },
+                blue: { border: "border-blue-300", bg: "bg-blue-50", icon: "text-blue-700", ring: "ring-blue-200" },
+              };
+              const c = colorMap[p.color];
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => selectPathway(p.id)}
+                  className={`relative text-left p-6 rounded-2xl border-2 transition-all duration-300 group ${
+                    isActive
+                      ? `${c.border} ${c.bg} ring-2 ${c.ring} shadow-md`
+                      : "border-stone-200 bg-white hover:border-stone-300 hover:shadow-sm"
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {isActive && (
+                    <div className="absolute top-3 right-3">
+                      <svg className={`w-5 h-5 ${c.icon}`} fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
+                  <div className={`w-10 h-10 rounded-xl ${isActive ? c.bg : "bg-stone-100"} flex items-center justify-center mb-3 transition-colors ${isActive ? c.icon : "text-stone-500 group-hover:text-stone-700"}`}>
+                    {p.icon}
+                  </div>
+                  <div className={`font-medium text-sm ${isActive ? "text-stone-900" : "text-stone-700"}`}>{p.label}</div>
+                  <div className="text-xs text-stone-500 mt-1">{p.sublabel}</div>
+                </button>
+              );
+            })}
+          </div>
+          {selectedPathway && (
+            <button
+              onClick={() => setSelectedPathway(null)}
+              className="mt-6 text-sm text-stone-500 hover:text-stone-700 transition-colors underline underline-offset-4 decoration-stone-300"
+            >
+              Show all options
+            </button>
+          )}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════ */}
+      {/* PRICING — CLINICAL THERAPY (ONE-TIME)      */}
+      {/* ═══════════════════════════════════════════ */}
+      <section id="pricing" ref={pricingRef} className="py-20 px-6 bg-stone-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-serif text-stone-900 mb-4">Transparent pricing</h2>
@@ -298,8 +438,9 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Free Discovery Call Banner */}
-          <div className="mb-14 bg-gradient-to-r from-stone-800 to-stone-700 rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Free Discovery Call Banner — visible in all pathways except ndis */}
+          {show(["parent", "adhd", "trauma"]) && (
+          <div className="mb-14 bg-gradient-to-r from-stone-800 to-stone-700 rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 transition-all duration-500">
             <div>
               <div className="text-xs uppercase tracking-widest text-amber-300 font-semibold mb-2">Start here</div>
               <h3 className="text-2xl font-serif mb-2">Free 15-Minute Discovery Call</h3>
@@ -307,24 +448,64 @@ export default function Home() {
                 Not sure where to begin? This is a no-pressure conversation to talk about what&apos;s going on and whether my approach is the right fit. Available in English or Mandarin.
               </p>
             </div>
-            <Link href="https://app.carepatron.com/booking/YOUR-BOOKING-LINK" className="bg-white text-stone-800 px-8 py-3.5 rounded-full text-sm font-medium hover:bg-stone-100 transition-all duration-300 whitespace-nowrap shadow-sm" target="_blank">
+            <Link
+              href="https://app.carepatron.com/booking/YOUR-BOOKING-LINK"
+              className="bg-white text-stone-800 px-8 py-3.5 rounded-full text-sm font-medium hover:bg-stone-100 transition-all duration-300 whitespace-nowrap shadow-sm"
+              target="_blank"
+            >
               Book Free Call →
             </Link>
           </div>
+          )}
 
-          {/* Section: Clinical Therapy */}
+          {/* NDIS Pathway — special view */}
+          {selectedPathway === "ndis" && (
+            <div className="mb-14 bg-gradient-to-br from-blue-50 to-stone-50 rounded-2xl p-10 border-2 border-blue-200">
+              <div className="max-w-2xl mx-auto text-center">
+                <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mx-auto mb-6">
+                  <svg className="w-7 h-7 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-serif text-stone-900 mb-3">NDIS Psychosocial Support</h3>
+                <div className="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-4 py-1.5 rounded-full mb-6">
+                  No out-of-pocket cost
+                </div>
+                <p className="text-stone-600 leading-relaxed mb-4">
+                  Social work therapy billed through your Capacity Building budget (Improved Daily Living). I work with plan-managed and self-managed participants. Sessions are flexible in length and frequency — tailored to your goals and plan.
+                </p>
+                <p className="text-stone-600 leading-relaxed mb-6">
+                  Many people have this funding without realising it can be used for therapy. If you&apos;re not sure whether your plan covers it, book a free call and I&apos;ll help you check.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Link href="https://app.carepatron.com/booking/YOUR-BOOKING-LINK" className="inline-flex items-center justify-center gap-2 bg-stone-800 text-white px-8 py-3.5 rounded-full text-sm font-medium hover:bg-blue-700 transition-all duration-300" target="_blank">
+                    Book Free Enquiry Call →
+                  </Link>
+                  <Link href="/ndis-support" className="inline-flex items-center justify-center gap-2 border-2 border-stone-300 text-stone-700 px-8 py-3.5 rounded-full text-sm font-medium hover:border-stone-500 transition-all duration-300">
+                    Learn More About NDIS
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Section: Clinical Therapy — visible for adhd, trauma, parent (not ndis) */}
+          {show(["adhd", "trauma", "parent"]) && (
+          <>
           <div className="mb-6 flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center flex-shrink-0">
               <svg className="w-5 h-5 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
               </svg>
-            </div>            <div>
+            </div>
+            <div>
               <h3 className="text-2xl font-serif text-stone-900">Clinical Counselling &amp; Therapy</h3>
               <p className="text-sm text-stone-500">One-time sessions — no ongoing commitment required</p>
             </div>
           </div>
 
-          {/* Clinical Cards */}
+          {/* Clinical EMDR Cards */}
+          {show(["adhd", "trauma"]) && (
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* Clinical EMDR */}
             <div className="p-8 rounded-2xl border-2 border-amber-200 bg-stone-800 text-white shadow-xl relative flex flex-col">
@@ -349,6 +530,7 @@ export default function Home() {
                 Book Session
               </Link>
             </div>
+
             {/* Extended EMDR */}
             <div className="p-8 rounded-2xl border-2 border-stone-200 bg-white hover:border-stone-300 hover:shadow-md transition-all duration-300 flex flex-col">
               <div className="text-xs uppercase tracking-widest font-semibold text-amber-700 mb-4">Extended EMDR</div>
@@ -372,9 +554,13 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          )}
+
           {/* Clinical Package + Parent Strategy */}
+          {show(["adhd", "trauma", "parent"]) && (
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* 4-Session Clinical Package */}
+            {show(["adhd", "trauma"]) && (
             <div className="p-8 rounded-2xl border-2 border-stone-200 bg-white hover:border-stone-300 hover:shadow-md transition-all duration-300 flex flex-col">
               <div className="flex items-start justify-between mb-4">
                 <div className="text-xs uppercase tracking-widest font-semibold text-amber-700">4-Session Clinical Package</div>
@@ -399,7 +585,10 @@ export default function Home() {
                 Get Started
               </Link>
             </div>
+            )}
+
             {/* Parent Strategy Session */}
+            {show(["parent"]) && (
             <div className="p-8 rounded-2xl border-2 border-stone-200 bg-white hover:border-stone-300 hover:shadow-md transition-all duration-300 flex flex-col">
               <div className="text-xs uppercase tracking-widest font-semibold text-amber-700 mb-4">Parent Strategy Session</div>
               <div className="mb-1">
@@ -421,8 +610,12 @@ export default function Home() {
                 Book Session
               </Link>
             </div>
+            )}
           </div>
+          )}
+
           {/* Connected Family Program */}
+          {show(["parent"]) && (
           <div className="p-8 rounded-2xl border-2 border-stone-200 bg-white hover:border-stone-300 hover:shadow-md transition-all duration-300 mb-8">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div className="flex-1">
@@ -448,7 +641,10 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          )}
+
           {/* NDIS Note */}
+          {show(["adhd", "trauma", "parent"]) && (
           <div className="bg-stone-50 rounded-2xl p-8 border border-stone-200 flex flex-col md:flex-row items-start gap-6">
             <div className="p-3 bg-amber-50 rounded-xl flex-shrink-0">
               <svg className="w-8 h-8 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -465,9 +661,16 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          )}
+          </>
+          )}
         </div>
       </section>
-      {/* COACHING PROGRAMS (RECURRING) */}
+
+      {/* ═══════════════════════════════════════════ */}
+      {/* COACHING PROGRAMS (RECURRING)               */}
+      {/* ═══════════════════════════════════════════ */}
+      {show(["adhd", "parent"]) && (
       <section id="coaching" className="py-20 px-6 bg-stone-50">
         <div className="max-w-6xl mx-auto">
           <div className="mb-6 flex items-center gap-3">
@@ -483,6 +686,8 @@ export default function Home() {
           </div>
 
           {/* Individual Coaching */}
+          {show(["adhd"]) && (
+          <>
           <div className="mb-6">
             <p className="text-xs uppercase tracking-widest font-semibold text-stone-400 mb-4 ml-1">Individual Coaching</p>
           </div>
@@ -495,7 +700,8 @@ export default function Home() {
                 description: "For people who want structured, ongoing support beyond one-off therapy sessions. Includes regular check-ins, goal-setting, and accountability — built around your ADHD brain, not against it.",
                 features: ["2 x coaching sessions per month", "Goal-setting and progress tracking", "Between-session support via messaging", "ADHD-adapted structure"],
                 cta: "Start Foundations",
-              },              {
+              },
+              {
                 label: "Growth",
                 price: "$497",
                 period: "/month",
@@ -525,7 +731,8 @@ export default function Home() {
                   <div className="absolute -top-3 left-6 bg-green-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
                     Most popular
                   </div>
-                )}                <div className={`text-xs uppercase tracking-widest font-semibold mb-4 ${plan.featured ? "text-green-200" : "text-green-700"}`}>
+                )}
+                <div className={`text-xs uppercase tracking-widest font-semibold mb-4 ${plan.featured ? "text-green-200" : "text-green-700"}`}>
                   {plan.label}
                 </div>
                 <div className="mb-1">
@@ -560,7 +767,12 @@ export default function Home() {
               </div>
             ))}
           </div>
+          </>
+          )}
+
           {/* Family Coaching */}
+          {show(["parent"]) && (
+          <>
           <div className="mb-6">
             <p className="text-xs uppercase tracking-widest font-semibold text-stone-400 mb-4 ml-1">Family Coaching</p>
           </div>
@@ -588,6 +800,7 @@ export default function Home() {
                 Start Family Core
               </Link>
             </div>
+
             {/* Family Extended */}
             <div className="p-8 rounded-2xl border-2 border-stone-200 bg-white hover:border-stone-300 hover:shadow-md transition-all duration-300 flex flex-col">
               <div className="text-xs uppercase tracking-widest font-semibold text-green-700 mb-4">Family Extended</div>
@@ -612,8 +825,12 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          </>
+          )}
         </div>
       </section>
+      )}
+
       {/* FAQ */}
       <section id="faq" className="py-20 px-6 bg-white">
         <div className="max-w-3xl mx-auto">
@@ -623,12 +840,12 @@ export default function Home() {
           <div className="space-y-4">
             {[
               {
-                q: "What's the difference between a social worker and a psychologist?",
+                q: "What\u0027s the difference between a social worker and a psychologist?",
                 a: "Both can provide evidence-based therapy. As a registered social worker, I use the same modalities — CBT, ACT, DBT, EMDR, IFS — but I also consider the broader context of your life: housing, employment, family systems, cultural background, and access to services. If you need a formal psychological assessment or diagnosis, I can refer you to a psychologist or psychiatrist for that."
               },
               {
-                q: "What's the difference between coaching and therapy?",
-                a: "Therapy focuses on processing past experiences, trauma, and emotional pain. Coaching is forward-looking — it's about building strategies, accountability, and momentum toward specific goals. Many clients benefit from both, and my coaching programs integrate therapeutic elements where appropriate. If during coaching it becomes clear that deeper clinical work is needed, we can adjust."
+                q: "What\u0027s the difference between coaching and therapy?",
+                a: "Therapy focuses on processing past experiences, trauma, and emotional pain. Coaching is forward-looking — it\u0027s about building strategies, accountability, and momentum toward specific goals. Many clients benefit from both, and my coaching programs integrate therapeutic elements where appropriate. If during coaching it becomes clear that deeper clinical work is needed, we can adjust."
               },
               {
                 q: "Can you diagnose ADHD or other conditions?",
@@ -636,18 +853,19 @@ export default function Home() {
               },
               {
                 q: "Do I need a referral or a Mental Health Care Plan?",
-                a: "No referral or MHCP is needed to see me privately. I'm not a Medicare provider, so sessions are paid directly (or via NDIS). If cost is a concern, ask about my sliding scale or whether your NDIS plan includes Capacity Building funding for therapy."
+                a: "No referral or MHCP is needed to see me privately. I\u0027m not a Medicare provider, so sessions are paid directly (or via NDIS). If cost is a concern, ask about my sliding scale or whether your NDIS plan includes Capacity Building funding for therapy."
               },
               {
                 q: "How does telehealth work?",
-                a: "Sessions happen over a secure video platform — similar to Zoom but designed for healthcare. You can join from any quiet, private space. I've found that most clients prefer telehealth once they've tried it. For EMDR specifically, I use a platform with a built-in light bar for bilateral stimulation, so the quality of processing is maintained."
-              },              {
-                q: "I've tried therapy before and it didn't help. How is this different?",
+                a: "Sessions happen over a secure video platform — similar to Zoom but designed for healthcare. You can join from any quiet, private space. I\u0027ve found that most clients prefer telehealth once they\u0027ve tried it. For EMDR specifically, I use a platform with a built-in light bar for bilateral stimulation, so the quality of processing is maintained."
+              },
+              {
+                q: "I\u0027ve tried therapy before and it didn\u0027t help. How is this different?",
                 a: "Most therapy is designed for neurotypical brains. If you have ADHD or process the world differently, standard approaches can feel frustrating — too slow, too much talking, not enough practical change. I adapt my approach to how your brain works: shorter exercises, more variety within sessions, concrete takeaways, and no judgment when life gets in the way between sessions."
               },
               {
-                q: "What if I don't know what I need help with?",
-                a: "That's fine. Many people come in with a general sense that something isn't working — they're stuck, overwhelmed, or going through a transition. The free 15-minute call is a good place to start. We talk about what's going on, and I can help clarify whether therapy, coaching, or a combination makes sense."
+                q: "What if I don\u0027t know what I need help with?",
+                a: "That\u0027s fine. Many people come in with a general sense that something isn\u0027t working — they\u0027re stuck, overwhelmed, or going through a transition. The free 15-minute call is a good place to start. We talk about what\u0027s going on, and I can help clarify whether therapy, coaching, or a combination makes sense."
               },
               {
                 q: "Can I use my NDIS plan to pay for sessions?",
@@ -655,7 +873,7 @@ export default function Home() {
               },
               {
                 q: "Is everything I say confidential?",
-                a: "Yes, with a few legal exceptions that apply to all health practitioners in Australia — situations involving serious risk of harm to yourself or others, mandatory reporting obligations, or court orders. I'll explain these clearly in our first session. Outside of those exceptions, what we discuss stays between us."
+                a: "Yes, with a few legal exceptions that apply to all health practitioners in Australia — situations involving serious risk of harm to yourself or others, mandatory reporting obligations, or court orders. I\u0027ll explain these clearly in our first session. Outside of those exceptions, what we discuss stays between us."
               },
               {
                 q: "我可以用中文做心理咨询吗？",
@@ -675,6 +893,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* CTA */}
       <section className="py-20 px-6 bg-stone-800 text-white text-center">
         <div className="max-w-2xl mx-auto">
