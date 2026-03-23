@@ -99,8 +99,7 @@ export default function Home() {
                 subtitle: "ADHD 心理治疗与辅导",
                 description: "Practical strategies and deeper emotional work for adults with ADHD — designed for how your brain actually works.",
                 href: "/adhd-therapy"
-              },
-              {
+              },              {
                 icon: "🌿",
                 title: "EMDR Trauma Therapy",
                 subtitle: "EMDR 创伤治疗",
@@ -169,74 +168,229 @@ export default function Home() {
 
       {/* Pricing */}
       <section id="pricing" className="py-20 px-6 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-serif text-stone-900 mb-16">Transparent pricing</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                label: "Free Discovery Call",
-                price: "$0",
-                duration: "15 minutes",
-                description: "See if we're a good fit — no pressure, no commitment.",
-                features: ["Discuss your needs and goals", "Ask questions about my approach", "Available in English or Mandarin", "No obligation to continue"],
-                featured: false,
-                cta: "Book Free Call"
-              },
-              {
-                label: "Individual Session",
-                price: "$150",
-                currency: "AUD",
-                duration: "55 minutes",
-                description: "Integrative therapy tailored to you — EMDR, ADHD, trauma, or general counselling.",
-                features: ["EMDR, IFS, ACT, CBT, DBT modalities", "ADHD-adapted session structure", "Secure telehealth platform", "Session notes and resources provided"],
-                featured: true,
-                cta: "Book Session"
-              },
-              {
-                label: "NDIS Participants",
-                price: "NDIS funded",
-                duration: "Flexible duration",
-                description: "Social work therapy billed through your Capacity Building budget.",
-                features: ["Therapeutic recovery coaching", "Plan-managed or self-managed", "Goal-focused, person-centred", "Bilingual service available"],
-                featured: false,
-                cta: "Enquire Now"
-              }
-            ].map((plan, i) => (
-              <div key={i} className={`p-8 rounded-2xl border-2 transition-all duration-300 ${plan.featured ? 'border-amber-200 bg-stone-800 text-white scale-105 shadow-xl' : 'border-stone-200 bg-white hover:border-stone-300'}`}>
-                <div className={`text-sm uppercase tracking-wide font-semibold mb-4 ${plan.featured ? 'text-amber-200' : 'text-green-600'}`}>
-                  {plan.label}
-                </div>
-                <div className="mb-2">
-                  <span className={`text-4xl font-serif ${plan.featured ? 'text-white' : 'text-stone-900'}`}>
-                    {plan.price}
-                  </span>
-                  {plan.currency && <span className={`text-lg ml-2 ${plan.featured ? 'text-stone-300' : 'text-stone-500'}`}>{plan.currency}</span>}
-                </div>
-                <div className={`text-sm mb-6 ${plan.featured ? 'text-stone-300' : 'text-stone-500'}`}>
-                  {plan.duration}
-                </div>
-                <p className={`text-sm mb-6 leading-relaxed ${plan.featured ? 'text-stone-200' : 'text-stone-600'}`}>
-                  {plan.description}
-                </p>
-                <ul className={`text-sm space-y-2 mb-8 text-left ${plan.featured ? 'text-stone-300' : 'text-stone-600'}`}>
-                  {plan.features.map((feature, j) => (
-                    <li key={j} className="flex items-start gap-2">
-                      <span className={`w-2 h-2 rounded-full mt-2 ${plan.featured ? 'bg-amber-400' : 'bg-green-600'} flex-shrink-0`}></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="https://app.carepatron.com/booking/YOUR-BOOKING-LINK"
-                      className={`block w-full py-3 rounded-full text-sm font-medium transition-all duration-300 text-center ${plan.featured ? 'bg-amber-600 hover:bg-amber-500 text-white' : 'bg-stone-800 hover:bg-amber-700 text-white'}`}
-                      target="_blank">
-                  {plan.cta}
-                </Link>
-              </div>
-            ))}
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-serif text-stone-900 mb-4">
+              Transparent pricing
+            </h2>
+            <p className="text-stone-500 font-serif mb-2">收费标准</p>
+            <p className="text-stone-500 text-sm max-w-xl mx-auto">
+              All prices in AUD. Sliding scale available for those experiencing financial hardship — mention this during your free discovery call.
+            </p>
           </div>
-          <p className="text-sm text-stone-500 mt-8 max-w-2xl mx-auto leading-relaxed">
-            Sliding scale available for those experiencing financial hardship — please mention this during your free discovery call.
-          </p>
+
+          {/* Free Discovery Call Banner */}
+          <div className="mb-12 bg-gradient-to-r from-stone-800 to-stone-700 rounded-2xl p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <div className="text-xs uppercase tracking-widest text-amber-300 font-semibold mb-2">Start here</div>
+              <h3 className="text-2xl font-serif mb-2">Free 15-Minute Discovery Call</h3>
+              <p className="text-stone-300 text-sm max-w-md">
+                Not sure where to begin? This is a no-pressure conversation to talk about what&apos;s going on and whether my approach is the right fit. Available in English or Mandarin.
+              </p>
+            </div>
+            <Link
+              href="https://app.carepatron.com/booking/YOUR-BOOKING-LINK"
+              className="bg-white text-stone-800 px-8 py-3.5 rounded-full text-sm font-medium hover:bg-stone-100 transition-all duration-300 whitespace-nowrap shadow-sm"
+              target="_blank"
+            >
+              Book Free Call →
+            </Link>
+          </div>
+
+          {/* Individual Sessions */}
+          <div className="mb-14">
+            <h3 className="text-xl font-serif text-stone-900 mb-2">Individual sessions</h3>
+            <p className="text-sm text-stone-500 mb-6">Pay-as-you-go — no ongoing commitment required</p>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                {
+                  label: "Therapy Session",
+                  price: "$150",
+                  duration: "55 min",
+                  description: "General integrative therapy for ADHD, anxiety, depression, life transitions, identity, or emotional regulation. I draw from ACT, IFS, DBT, and somatic approaches — adapted to how your brain works, not a one-size-fits-all model.",
+                  features: ["Tailored to your needs and goals", "ADHD-adapted pacing and structure", "Secure telehealth platform", "Session notes provided"],
+                  cta: "Book Session",
+                },
+                {
+                  label: "EMDR Trauma Session",
+                  price: "$170",
+                  duration: "55 min",
+                  description: "Targeted trauma reprocessing using bilateral stimulation. For PTSD, complex trauma, phobias, accumulated shame, or anxiety rooted in past experiences. Uses a specialised telehealth platform with a built-in light bar.",
+                  features: ["Full EMDR protocol", "Built-in light bar for bilateral stimulation", "ADHD-adapted session structure", "Thorough grounding and closure"],
+                  featured: true,
+                  cta: "Book Session",
+                },
+                {
+                  label: "Extended Session",
+                  price: "$260",
+                  duration: "90 min",                  description: "A longer session for when 55 minutes isn't enough. Ideal for complex or layered trauma, intensive EMDR processing, or sessions where you need more space to go deeper without feeling rushed at the end.",
+                  features: ["Extended processing time", "Complex trauma work", "Thorough closure and grounding", "Recommended for intensive phases"],
+                  cta: "Book Session",
+                },
+              ].map((plan, i) => (
+                <div
+                  key={i}
+                  className={`p-8 rounded-2xl border-2 transition-all duration-300 flex flex-col ${
+                    plan.featured
+                      ? "border-amber-200 bg-stone-800 text-white shadow-xl relative"
+                      : "border-stone-200 bg-white hover:border-stone-300 hover:shadow-md"
+                  }`}
+                >
+                  {plan.featured && (
+                    <div className="absolute -top-3 left-6 bg-amber-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      Most popular
+                    </div>
+                  )}
+                  <div
+                    className={`text-xs uppercase tracking-widest font-semibold mb-4 ${
+                      plan.featured ? "text-amber-200" : "text-amber-700"
+                    }`}
+                  >
+                    {plan.label}
+                  </div>
+                  <div className="mb-1">
+                    <span
+                      className={`text-4xl font-serif ${
+                        plan.featured ? "text-white" : "text-stone-900"
+                      }`}
+                    >                      {plan.price}
+                    </span>
+                    <span
+                      className={`text-sm ml-2 ${
+                        plan.featured ? "text-stone-300" : "text-stone-500"
+                      }`}
+                    >
+                      AUD
+                    </span>
+                  </div>
+                  <div className={`text-sm mb-4 ${plan.featured ? "text-stone-300" : "text-stone-500"}`}>
+                    {plan.duration}
+                  </div>
+                  <p
+                    className={`text-sm mb-6 leading-relaxed ${
+                      plan.featured ? "text-stone-200" : "text-stone-600"
+                    }`}
+                  >
+                    {plan.description}
+                  </p>
+                  <ul
+                    className={`text-sm space-y-2.5 mb-8 text-left flex-1 ${
+                      plan.featured ? "text-stone-300" : "text-stone-600"
+                    }`}
+                  >
+                    {plan.features.map((feature, j) => (
+                      <li key={j} className="flex items-start gap-2.5">
+                        <svg className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.featured ? "text-amber-400" : "text-green-600"}`} fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
+                        </svg>                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href="https://app.carepatron.com/booking/YOUR-BOOKING-LINK"
+                    className={`block w-full py-3 rounded-full text-sm font-medium transition-all duration-300 text-center ${
+                      plan.featured
+                        ? "bg-amber-600 hover:bg-amber-500 text-white"
+                        : "bg-stone-800 hover:bg-amber-700 text-white"
+                    }`}
+                    target="_blank"
+                  >
+                    {plan.cta}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Specialised Sessions & Packages */}
+          <div className="mb-14 grid md:grid-cols-2 gap-6">
+            {/* Parent Strategy Session */}
+            <div className="p-8 rounded-2xl border-2 border-stone-200 bg-white hover:border-stone-300 hover:shadow-md transition-all duration-300">
+              <div className="text-xs uppercase tracking-widest font-semibold text-amber-700 mb-2">Parent Strategy Session</div>
+              <div className="mb-1">
+                <span className="text-4xl font-serif text-stone-900">$150</span>
+                <span className="text-sm ml-2 text-stone-500">AUD · 50 min</span>
+              </div>
+              <p className="text-sm text-stone-600 leading-relaxed mt-4 mb-4">                A focused session for parents navigating challenges with their child&apos;s behaviour, emotional regulation, or neurodivergence. You&apos;ll leave with practical, evidence-based strategies you can start using right away — not just general advice.
+              </p>
+              <ul className="text-sm text-stone-600 space-y-2 mb-6">
+                <li className="flex items-start gap-2.5">
+                  <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" /></svg>
+                  Tailored to your child&apos;s needs
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" /></svg>
+                  Evidence-based parenting strategies
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" /></svg>
+                  Available in English or Mandarin
+                </li>
+              </ul>
+              <Link
+                href="https://app.carepatron.com/booking/YOUR-BOOKING-LINK"
+                className="block w-full py-3 rounded-full text-sm font-medium bg-stone-800 hover:bg-amber-700 text-white transition-all duration-300 text-center"
+                target="_blank"
+              >
+                Book Session
+              </Link>
+            </div>
+
+            {/* 4-Session Package */}
+            <div className="p-8 rounded-2xl border-2 border-stone-200 bg-white hover:border-stone-300 hover:shadow-md transition-all duration-300">
+              <div className="flex items-start justify-between mb-2">
+                <div className="text-xs uppercase tracking-widest font-semibold text-amber-700">4-Session Package</div>
+                <div className="bg-green-50 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Save $40</div>
+              </div>              <div className="mb-1">
+                <span className="text-4xl font-serif text-stone-900">$560</span>
+                <span className="text-sm ml-2 text-stone-500">AUD</span>
+              </div>
+              <p className="text-sm text-stone-600 leading-relaxed mt-4 mb-4">
+                Four standard therapy sessions at a reduced rate. Best for EMDR processing (which typically requires multiple sessions), working through a specific goal, or when you know you&apos;re committing to a course of treatment rather than a one-off.
+              </p>
+              <ul className="text-sm text-stone-600 space-y-2 mb-6">
+                <li className="flex items-start gap-2.5">
+                  <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" /></svg>
+                  4 x 55-minute sessions
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" /></svg>
+                  Use for therapy or EMDR sessions
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" /></svg>
+                  Book at your own pace
+                </li>
+              </ul>
+              <Link
+                href="https://app.carepatron.com/booking/YOUR-BOOKING-LINK"
+                className="block w-full py-3 rounded-full text-sm font-medium bg-stone-800 hover:bg-amber-700 text-white transition-all duration-300 text-center"
+                target="_blank"
+              >
+                Get Started
+              </Link>
+            </div>
+          </div>
+
+          {/* NDIS Note */}
+          <div className="bg-stone-50 rounded-2xl p-8 border border-stone-200 flex flex-col md:flex-row items-start gap-6">
+            <div className="p-3 bg-amber-50 rounded-xl flex-shrink-0">              <svg className="w-8 h-8 text-amber-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="font-serif text-xl text-stone-800 mb-2">NDIS Participants</h3>
+              <p className="text-sm text-stone-600 leading-relaxed mb-3">
+                Social work therapy billed through your Capacity Building budget (Improved Daily Living). I work with plan-managed and self-managed participants. Sessions are flexible in duration — no out-of-pocket cost. Many people have this funding without realising it can be used for therapy.
+              </p>
+              <Link
+                href="/ndis-support"
+                className="text-sm text-amber-700 font-medium hover:text-amber-800 transition-colors"
+              >
+                Learn more about NDIS support →
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -250,8 +404,7 @@ export default function Home() {
             {[
               {
                 q: "What's the difference between a social worker and a psychologist?",
-                a: "Both can provide evidence-based therapy. As a registered social worker, I use the same modalities — CBT, ACT, DBT, EMDR, IFS — but I also consider the broader context of your life: housing, employment, family systems, cultural background, and access to services. If you need a formal psychological assessment or diagnosis, I can refer you to a psychologist or psychiatrist for that."
-              },
+                a: "Both can provide evidence-based therapy. As a registered social worker, I use the same modalities — CBT, ACT, DBT, EMDR, IFS — but I also consider the broader context of your life: housing, employment, family systems, cultural background, and access to services. If you need a formal psychological assessment or diagnosis, I can refer you to a psychologist or psychiatrist for that."              },
               {
                 q: "Can you diagnose ADHD or other conditions?",
                 a: "No. Formal diagnoses in Australia are made by psychiatrists, paediatricians, or psychologists with specific assessment training. What I can do is help you understand your experience, work through the emotional impact, develop practical strategies, and refer you to a clinician who can assess you if needed."
@@ -283,8 +436,7 @@ export default function Home() {
               {
                 q: "我可以用中文做心理咨询吗？",
                 a: "可以。我提供完全中文的心理治疗，也可以中英双语交替使用。你可以用最自然、最舒服的方式表达自己。很多来访者发现，某些感受用中文更容易表达，而其他想法用英文更准确。在治疗中自由切换语言，是一种很有价值的工具。"
-              },
-            ].map((item, i) => (
+              },            ].map((item, i) => (
               <details key={i} className="group bg-white rounded-xl border border-stone-200 overflow-hidden">
                 <summary className="px-6 py-5 cursor-pointer flex items-center justify-between text-stone-800 font-serif text-lg hover:bg-stone-50 transition-colors">
                   <span className="pr-4">{item.q}</span>
@@ -314,7 +466,6 @@ export default function Home() {
           </Link>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="py-12 px-6 bg-stone-900 text-stone-500 text-sm">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
