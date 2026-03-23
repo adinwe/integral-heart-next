@@ -67,7 +67,7 @@ export default function Home() {
 
   // Visibility helper: show a card if no pathway selected or if the card belongs to the active pathway
   const show = (cardPathways: string[]) =>
-    !selectedPathway || cardPathways.includes(selectedPathway);
+    !!selectedPathway && cardPathways.includes(selectedPathway);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -419,7 +419,7 @@ export default function Home() {
               onClick={() => setSelectedPathway(null)}
               className="mt-6 text-sm text-stone-500 hover:text-stone-700 transition-colors underline underline-offset-4 decoration-stone-300"
             >
-              Show all options
+              Change pathway
             </button>
           )}
         </div>
@@ -437,6 +437,19 @@ export default function Home() {
               All prices in AUD. Sliding scale available for those experiencing financial hardship — mention this during your free discovery call.
             </p>
           </div>
+
+          {/* Prompt to select a pathway */}
+          {!selectedPathway && (
+            <div className="text-center py-16 px-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-50 mb-6">
+                <svg className="w-8 h-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l7.5-7.5 7.5 7.5m-15 6l7.5-7.5 7.5 7.5" />
+                </svg>
+              </div>
+              <p className="text-lg text-stone-600 font-serif mb-2">Select your pathway above to see your pricing</p>
+              <p className="text-sm text-stone-400">Choose the option that best describes your situation</p>
+            </div>
+          )}
 
           {/* Free Discovery Call Banner — visible in all pathways except ndis */}
           {show(["parent", "adhd", "trauma"]) && (
