@@ -1,0 +1,164 @@
+{
+  "workspace": {
+    "name": "ACMHP",
+    "description": "Australian Association of Culturally and Linguistically Diverse Mental Health Practitioners",
+    "created": "2026-03"
+  },
+  "cleanup": {
+    "rename": [
+      {
+        "from": "all-acmhp",
+        "to": "announcements"
+      }
+    ],
+    "archive": ["new-channel"]
+  },
+  "channels": {
+    "open": [
+      {
+        "name": "announcements",
+        "name_cn": "公告与通知",
+        "purpose_en": "Official ACMHP announcements — events, governance updates, milestones, and member recognition.",
+        "purpose_cn": "ACMHP官方公告 — 活动、治理更新、里程碑及会员表彰。",
+        "topic": "Post permissions: Committee only | 发布权限：仅委员会成员 | React with :white_check_mark: to acknowledge",
+        "posting_restricted": true,
+        "is_new": false,
+        "notes": "Renamed from #all-acmhp"
+      },
+      {
+        "name": "introductions",
+        "name_cn": "自我介绍",
+        "purpose_en": "Welcome new members! Share who you are, your practice background, and what brought you to ACMHP.",
+        "purpose_cn": "欢迎新成员！分享你的背景、专业领域，以及加入ACMHP的原因。",
+        "topic": "Introduce yourself in English, 中文, or both! :earth_asia: 用英文、中文或双语介绍自己！",
+        "posting_restricted": false,
+        "is_new": true
+      },
+      {
+        "name": "events",
+        "name_cn": "活动信息",
+        "purpose_en": "Upcoming ACMHP events — peer supervision sessions, seminars, book club, body-mind healing workshops, AGM, and external events of interest.",
+        "purpose_cn": "ACMHP活动信息 — 同辈督导、研讨会、读书会、身心疗愈工作坊、年度大会及相关外部活动。",
+        "topic": ":date: Check pinned post for the full 2026 event calendar | 查看置顶消息获取2026年完整活动日历",
+        "posting_restricted": false,
+        "is_new": true
+      },
+      {
+        "name": "resources",
+        "name_cn": "资源分享",
+        "purpose_en": "Share articles, research papers, tools, training opportunities, and clinical resources relevant to CALD mental health practice.",
+        "purpose_cn": "分享与多元文化心理健康实践相关的文章、研究论文、工具、培训机会和临床资源。",
+        "topic": "Use threads to discuss shared resources :thread: 请使用话题讨论分享的资源",
+        "posting_restricted": false,
+        "is_new": true
+      },
+      {
+        "name": "peer-support",
+        "name_cn": "同伴支持",
+        "purpose_en": "Peer consultation, practice reflections, and professional support for CALD practitioners. A safe space for sharing challenges and insights.",
+        "purpose_cn": "同辈咨询、实践反思及多元文化从业者的专业支持。安全空间，分享挑战与见解。",
+        "topic": ":warning: No client-identifying info | 请勿发布可识别来访者身份的信息 | Confidentiality first 保密优先",
+        "posting_restricted": false,
+        "is_new": true,
+        "pinned_message": "Clinical boundary reminder"
+      },
+      {
+        "name": "social",
+        "name_cn": "闲聊天地",
+        "purpose_en": "Off-topic chat, celebrations, food recommendations, memes, and getting to know each other beyond work. :tada:",
+        "purpose_cn": "工作以外的闲聊、庆祝、美食推荐、趣图，认识彼此更多面 :tada:",
+        "posting_restricted": false,
+        "is_new": false,
+        "notes": "Existing channel - update purpose"
+      }
+    ],
+    "private": [
+      {
+        "name": "committee",
+        "name_cn": "委员会",
+        "purpose_en": "General committee discussion — quick decisions, cross-workstream coordination, and anything that doesn't fit a specific channel.",
+        "purpose_cn": "委员会综合讨论 — 快速决策、跨工作流协调及其他议题。",
+        "topic": ":house: Committee home base | 委员会大本营 | Use specific channels for grants, events, governance where possible",
+        "is_new": true
+      },
+      {
+        "name": "grants",
+        "name_cn": "资助与基金",
+        "purpose_en": "Grant identification, application drafting, budget construction, deadlines, and funding strategy. Track all active and upcoming applications here.",
+        "purpose_cn": "资助识别、申请撰写、预算编制、截止日期及资金策略。在此追踪所有进行中和即将到来的申请。",
+        "topic": ":clipboard: Active: CCHH Small Stream (due TBC) | Lyra Taylor #0080 | Volunteer Grants 2025-26 EOI sent",
+        "is_new": true
+      },
+      {
+        "name": "governance",
+        "name_cn": "治理与合规",
+        "purpose_en": "Meeting minutes, AGM preparation, ACNC compliance, Consumer Affairs Victoria obligations, constitution amendments, and committee elections.",
+        "purpose_cn": "会议纪要、年度大会准备、ACNC合规、维州消费者事务义务、章程修订及委员会选举。",
+        "topic": ":scroll: AIR Act 2012 compliance | ACNC annual reporting | Quorum = [X] members",
+        "is_new": true
+      },
+      {
+        "name": "events-planning",
+        "name_cn": "活动策划",
+        "purpose_en": "Event logistics, venue booking, speaker coordination, promotional material, and post-event reviews. The behind-the-scenes of #events.",
+        "purpose_cn": "活动后勤、场地预订、演讲者协调、宣传材料及活动回顾。#events 频道的幕后工作区。",
+        "is_new": true
+      },
+      {
+        "name": "research",
+        "name_cn": "研究项目",
+        "purpose_en": "Practice research coordination — Lyra Taylor EMDR project, culturally adapted cognition checklist development, literature reviews, and future research directions.",
+        "purpose_cn": "实践研究协调 — Lyra Taylor EMDR项目、文化适应认知清单开发、文献综述及未来研究方向。",
+        "topic": ":microscope: Lead: Daria (Xuejiao) Li | Current: EMDR culturally adapted cognition checklist",
+        "is_new": true
+      },
+      {
+        "name": "finance",
+        "name_cn": "财务",
+        "purpose_en": "Budget tracking, reimbursement requests, financial reporting, and treasurer updates. Keep financial discussions consolidated here.",
+        "purpose_cn": "预算追踪、报销申请、财务报告及财务主管更新。所有财务讨论集中在此。",
+        "is_new": true
+      }
+    ]
+  },
+  "guidelines": {
+    "threads": {
+      "en": "Reply in threads to keep channels readable. Especially important in #resources and #peer-support where discussions can get deep.",
+      "cn": "请使用话题回复以保持频道整洁，尤其在资源分享和同伴支持频道。"
+    },
+    "bilingual": {
+      "en": "Post in English, Chinese, or both — whatever feels natural. We value linguistic diversity as a strength.",
+      "cn": "可以用英文、中文或双语发帖——用你最自然的方式。我们视语言多样性为力量。"
+    },
+    "pinning": {
+      "en": "Pin key documents, deadlines, and decisions in each channel. Use pinned messages as a lightweight 'channel wiki'.",
+      "cn": "在每个频道置顶关键文档、截止日期和决策，作为频道的简易知识库。"
+    },
+    "emoji_reactions": {
+      "white_check_mark": "acknowledgement",
+      "eyes": "I've seen it",
+      "raising_hand": "volunteering",
+      "question": "questions"
+    },
+    "notifications": {
+      "en": "Mute #social if it gets noisy. Set #announcements and your committee channels to 'All messages'. Everything else can be 'Mentions only'.",
+      "cn": "如果闲聊太多可静音#social。将#announcements和委员会频道设为'所有消息'，其他设为'仅提及'。"
+    },
+    "confidentiality": {
+      "en": "Never share client-identifying information in any channel. Committee channels are private but not encrypted — treat accordingly.",
+      "cn": "任何频道均不得分享可识别来访者身份的信息。委员会频道虽为私密但非加密，请谨慎处理。"
+    }
+  },
+  "setup_checklist": [
+    "Rename #all-acmhp → #announcements (Channel settings → Edit)",
+    "Archive #new-channel (Channel settings → Archive)",
+    "Update #social purpose with bilingual description",
+    "Create 5 public channels: #introductions, #events, #resources, #peer-support",
+    "Create 6 private channels: #committee, #grants, #governance, #events-planning, #research, #finance",
+    "Copy bilingual purposes from this guide into each channel's description",
+    "Set channel topics using the suggested topics",
+    "Invite committee members to all private channels",
+    "Restrict posting in #announcements to workspace admins",
+    "Pin a welcome message / confidentiality reminder in #peer-support"
+  ]
+}
